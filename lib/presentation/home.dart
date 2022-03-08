@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:sun_flare/presentation/data_flare_storm.dart';
 import 'package:sun_flare/presentation/home_store.dart';
+import 'package:sun_flare/presentation/loading.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,35 +24,40 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('App de ejemplo Mobx'),
-        elevation: 0,
-      ),
-      body: SafeArea(child: _body()),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.refresh),
-        onPressed: () => {store.getSolarActivities()},
-      ),
-    );
-  }
-
-  Widget _body() {
-    return Observer(builder: (_) {
-      if (store.isLoading) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-              'Last Solar Flare Date: ${store.solarActivities.lastFlare?.startTime}'),
-          Text(
-              'Last Geo Storm Date: ${store.solarActivities.lastStorm?.startTime}'),
-        ],
-      );
-    });
+    return DefaultTabController(
+        length: 3,
+        initialIndex: 1,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.directions_car)),
+                Tab(icon: Icon(Icons.directions_transit)),
+                Tab(icon: Icon(Icons.directions_bike)),
+              ],
+            ),
+            title: const Text('App de ejemplo'),
+          ),
+          body: TabBarView(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Stack(
+                    children: [
+                      Loading(store: store),
+                      DataFlareStorm(store: store)
+                    ],
+                  ),
+                  ElevatedButton(
+                      onPressed: () => {store.getSolarActivities()},
+                      child: const Text('data'))
+                ],
+              ),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
+            ],
+          ),
+        ));
   }
 }
