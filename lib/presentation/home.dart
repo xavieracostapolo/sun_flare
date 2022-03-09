@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:sun_flare/presentation/data_flare_storm.dart';
 import 'package:sun_flare/presentation/home_store.dart';
 import 'package:sun_flare/presentation/loading.dart';
@@ -55,7 +54,34 @@ class _HomeState extends State<Home> {
                 ],
               ),
               Icon(Icons.directions_transit),
-              Icon(Icons.directions_bike),
+              FlutterMap(
+                options: MapOptions(
+                  center: LatLng(6.148726, -75.621499),
+                  zoom: 13.0,
+                ),
+                layers: [
+                  TileLayerOptions(
+                    urlTemplate:
+                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    subdomains: ['a', 'b', 'c'],
+                    attributionBuilder: (_) {
+                      return const Text("© OpenStreetMap contributors");
+                    },
+                  ),
+                  MarkerLayerOptions(
+                    markers: [
+                      Marker(
+                        width: 80.0,
+                        height: 80.0,
+                        point: LatLng(6.148726, -75.621499),
+                        builder: (ctx) => Container(
+                          child: const FlutterLogo(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
         ));

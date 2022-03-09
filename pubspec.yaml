@@ -38,6 +38,9 @@ dependencies:
   mobx: any
   flutter_mobx: any
   get_it: ^7.2.0
+  lottie: ^1.2.2
+  flutter_map: any # or the latest version on Pub
+  latlng: any
 
 dev_dependencies:
   flutter_test:
