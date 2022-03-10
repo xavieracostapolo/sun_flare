@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sun_flare/presentation/data_flare_storm.dart';
 import 'package:sun_flare/presentation/get_user_location.dart';
 import 'package:sun_flare/presentation/home_store.dart';
 import 'package:sun_flare/presentation/loading.dart';
 import 'package:sun_flare/presentation/products.dart';
+import 'package:sun_flare/presentation/sign_in_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final HomeStore store = HomeStore();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -54,7 +57,10 @@ class _HomeState extends State<Home> {
                   ),
                   ElevatedButton(
                       onPressed: () => {store.getSolarActivities()},
-                      child: const Text('data'))
+                      child: const Text('data')),
+                  ElevatedButton(
+                      onPressed: () => {signOutGoogle()},
+                      child: const Text('logout'))
                 ],
               ),
               const Products(),
@@ -89,5 +95,12 @@ class _HomeState extends State<Home> {
             ],
           ),
         ));
+  }
+
+  void signOutGoogle() async {
+    await googleSignIn.signOut();
+    print("User Sign Out");
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => SignInScreen()));
   }
 }
