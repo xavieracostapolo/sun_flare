@@ -2,6 +2,9 @@
     package="com.example.sun_flare">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     
    <application
         android:label="sun_flare"
@@ -33,5 +36,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCIvor4hiiCgHeQgDhPaUNC7fqPI6MkF58"/>
     </application>
 </manifest>

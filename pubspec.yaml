@@ -41,6 +41,15 @@ dependencies:
   lottie: ^1.2.2
   flutter_map: any # or the latest version on Pub
   latlng: any
+  firebase_core: ^1.13.1
+  cloud_firestore: ^3.1.10
+  location: ^4.3.0
+  geocode: ^1.0.1
+  provider: ^6.0.2
+  google_maps_flutter: ^2.1.2
+  geocoder: ^0.2.1
+  font_awesome_flutter: ^9.2.0
+  google_sign_in: ^5.2.0
 
 dev_dependencies:
   flutter_test:

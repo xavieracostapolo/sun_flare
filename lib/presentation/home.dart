@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sun_flare/presentation/data_flare_storm.dart';
+import 'package:sun_flare/presentation/get_user_location.dart';
 import 'package:sun_flare/presentation/home_store.dart';
 import 'package:sun_flare/presentation/loading.dart';
+import 'package:sun_flare/presentation/products.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,12 +26,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: 4,
         initialIndex: 1,
         child: Scaffold(
           appBar: AppBar(
             bottom: const TabBar(
               tabs: [
+                Tab(icon: Icon(Icons.maps_home_work)),
                 Tab(icon: Icon(Icons.directions_car)),
                 Tab(icon: Icon(Icons.directions_transit)),
                 Tab(icon: Icon(Icons.directions_bike)),
@@ -39,6 +42,7 @@ class _HomeState extends State<Home> {
           ),
           body: TabBarView(
             children: [
+              GetUserLocation(title: 'title'),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -53,7 +57,7 @@ class _HomeState extends State<Home> {
                       child: const Text('data'))
                 ],
               ),
-              Icon(Icons.directions_transit),
+              const Products(),
               FlutterMap(
                 options: MapOptions(
                   center: LatLng(6.148726, -75.621499),
