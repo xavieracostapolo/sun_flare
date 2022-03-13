@@ -32,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "GEEKS FOR GEEKS",
+                "TEST DE MARICADAS VARIAS",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
               Padding(

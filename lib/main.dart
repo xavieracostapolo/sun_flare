@@ -4,6 +4,12 @@ import 'package:sun_flare/application/dependencies/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+  await init();
+  setUp();
+  runApp(const App());
+}
+
+Future init() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       name: 'TestFlutterCrud',
@@ -12,6 +18,4 @@ void main() async {
           apiKey: 'AIzaSyAnkz7YKc-ntT18c9VJPqwp_oM0s0HZh1I',
           messagingSenderId: '',
           projectId: 'testfluttercrud'));
-  setUp();
-  runApp(const App());
 }
